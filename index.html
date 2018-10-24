@@ -37,7 +37,7 @@
 			let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 			xmlhttp.open("POST", "./getSpot", true);
 			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xmlhttp.send(JSON.stringify());
+			xmlhttp.send();
 
 			//get responce
 			xmlhttp.onreadystatechange = function() {
