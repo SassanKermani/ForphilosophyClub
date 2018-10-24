@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+		
+	<center>
+		<br>
+		<br>
+		<hr>
+		<br>
+		<br>
+		<div>
+			where is philosophy club meeting?
+		</div>
+		<br>
+		<div id="spot">
+			defult
+		</div>
+		<br>
+		<br>
+		<hr>
+		<br>
+		<br>
+		<div>
+			<p> update phillips club's location </p>
+			<textarea id="newSpot"> </textarea>
+			<br>
+			<button onclick="updateSpot()"> update </button>
+		</div>
+	</center>
+
+	<script type="text/javascript">
+		
+			let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+			xmlhttp.open("POST", "./getSpot");
+			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify());
+
+			//get responce
+			xmlhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+					console.log("this.responseText");
+					console.log(this.responseText);
+					document.getElementById("spot").innerHTML = this.responseText;
+				}
+			}
+
+			let updateSpot = ()=>{
+
+				let jsonObjectIAmSending = {
+					"spot" : `${document.getElementById("newSpot").value}`				}
+
+				console.log(jsonObjectIAmSending);
+
+				let newXmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+				newXmlhttp.open("POST", "./newSpot");
+				newXmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+				newXmlhttp.send(JSON.stringify(jsonObjectIAmSending));
+
+				//get responce
+				newXmlhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+						console.log("this.responseText");
+						console.log(this.responseText);
+						document.getElementById("spot").innerHTML = this.responseText;
+					}
+				}
+
+			}
+	</script>
+</body>
+</html>
